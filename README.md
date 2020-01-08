@@ -17,8 +17,8 @@ on a large scale data set.
 
 
 ## Table of Contents
-1. [Data](#data)
-2. [Extraction and Preprocessing](#preprocessing)
+1. [Obtaining the Datasets](#data)
+2. [Loading and Preprocessing](#preprocessing)
     * [Download Images to Google Colab](#download-all-images-to-colab)
     * [Resize Images](#crop-and-resize-all-images)
     * [Checking Blurness of Images](#Checking-Blur)
@@ -32,26 +32,22 @@ on a large scale data set.
 
 The data originates from a [2015 Kaggle competition](https://www.kaggle.com/c/diabetic-retinopathy-detection). However, is an atypical Kaggle dataset. In most Kaggle competitions, the data has already been cleaned, giving the data scientist very little to preprocess. With this dataset, this isn't the case.
 
-All images are taken of different people, using different cameras, and of different sizes. Pertaining to the [preprocessing](#preprocessing) section, this data is extremely noisy, and requires multiple preprocessing steps to get all images to a useable format for training a model.
-
 The training data is comprised of 35,126 images, which are augmented during preprocessing.
 
 ### Prerequisites
 
-You'll need to install:
+Install:
 
 * [Anaconda](https://www.continuum.io/downloads)
 * [Python (Minimum 3)](https://www.continuum.io/blog/developer-blog/python-3-support-anaconda)
 * [pandas](http://pandas.pydata.org/)
 * [Seaborn](https://seaborn.pydata.org/)
-* [Fast.ai](https://seaborn.pydata.org/)
 
-
-## Extraction and Preprocessing
+## Loading and Preprocessing
 
 The preprocessing pipeline is the following:
 
-### Download Images to Google Colab
+### Images were downloaded from Kaggle
 Google Colab was used as a platform for this dataset.
 
 
@@ -75,16 +71,10 @@ And then take the variance (i.e. standard deviation squared) of the response.
 If the variance falls below a pre-defined threshold, then the image is considered blurry; otherwise, the image is not blurry. Here is the paper with talks about it's implementation, Ariation of the Laplacian by Pech-Pacheco et al. in their 2000 ICPR paper, [Diatom autofocusing in brightfield microscopy: a comparative study](http://optica.csic.es/papers/icpr2k.pdf).
 
 ### Data Augmentation
-All images were rotated and mirrored.Images without retinopathy were mirrored;
-images that had retinopathy were mirrored, and rotated 90, 120, 180, and 270
-degrees.
+Because of the class imbalance, all the eye images tested positive were rotated, sheer and shifted using image data generator api in keras. 
 
-The first images show two pairs of eyes, along with the black borders. Notice in
-the cropping and rotations how the majority of noise is removed.
-
-
-
-## Neural Network Architecture
+## Neural Network Architecture:
+Extracting features using ResNet pretrained convolutionary base. Two densely connected classifier were put on top of the convolutional base. The last three layers of the convolutional base were unfreeze to make them trainable which were then trained with the two densely connected layers
 
 | Layer (type)             	| Output Shape        	| Param # 	|
 |--------------------------	|---------------------	|---------	|
