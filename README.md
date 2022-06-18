@@ -730,11 +730,6 @@ Confusion Matrix
 1. [What is Diabetic Retinopathy?](http://www.mayoclinic.org/diseases-conditions/diabetic-retinopathy/basics/definition/con-20023311)
 2. [Blur Detection](https://www.pyimagesearch.com/2015/09/07/blur-detection-with-opencv/)
 
-## Authors
-
-* **[Abhik Sarkar](https://github.com/abhiksark)**
-* [Fastai](https://www.fast.ai/)
-
 
 ## License
 
